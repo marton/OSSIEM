@@ -1,11 +1,10 @@
 # Graylog
-<br>
-I've provided some basic files to make your life easier on initial deployment, feel free to change/delete/modify them in any way that is useful to you, but DO NOT skip the next step.
 
-## Pre-Deployment
+Config files and lookup data mounted read-only into the Graylog container.
 
-Graylog container runs as the graylog user with UUID 1100, for this files to be recognized once the container is deployed you need to modify file ownership before starting the container.
-```
-sudo chown 1100:1100 *
-```
-If you have any other files you would like pass onto your Graylog instance, they would also have to go through the same process for Graylog to be able to use them.
+- `graylog.conf`: `password_secret`, `root_password_sha2` and `elasticsearch_hosts` come
+  from the environment (`GRAYLOG_PASSWORD_SECRET`, `GRAYLOG_ROOT_PASSWORD`, `INDEXER_PASSWORD`);
+  see `docker-compose.yml`.
+- The Wazuh root CA is added to Graylog's Java truststore by the `graylog-truststore`
+  init service (`init/graylog-truststore.sh`), so no manual `keytool` step is needed.
+- Files only need to be readable. Anything Graylog writes lives in the `graylog_data` volume.

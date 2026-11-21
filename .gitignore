@@ -1,0 +1,4 @@
+# Local / Coolify-generated environment with secrets; see .env.example
+.env
+
+.DS_Store

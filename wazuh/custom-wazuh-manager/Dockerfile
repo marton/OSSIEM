@@ -3,6 +3,8 @@ FROM amazonlinux:2023
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
+LABEL org.opencontainers.image.source=https://github.com/marton/OSSIEM
+
 ARG WAZUH_VERSION
 ARG WAZUH_TAG_REVISION
 ARG S6_VERSION="v2.2.0.3"
